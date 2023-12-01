@@ -1,0 +1,29 @@
+- Decide on network id
+- Keep the node consensus/protocol versions to Iris (5) because of mdw incompatibility
+- Generate HC configuration - hyperchain-starter-kit
+    - init (edit) -> retrieve-contracts -> gen-economy (edit) -> gen-node-conf (edit)
+- Generate HC configuration - details
+    - Configure parent chain
+        - Configure random spend address. Technical requirement, not used as wallet.
+        - Configure transaction fee and amount. Use minimum allowed amount.
+        - Configure polling, keep default 500ms
+        - Configure "confirmations" to 0 as it doesn't work otherwise
+        - Configure "start_height" to a future - VERY IMPORTANT
+    - Configure `contract_owner` with random unknown priv key address. Can be zero address, the default.
+    - Decide on "genesis stakers" accounts. Generate keys/wallets.
+    - Fund stakers parent chain wallets with enought tokens to keep it running. Used for parent chain commitments fees.
+    - Child chain wallets are funded in the genesis accounts configuration of the child chain.
+    - Create instance (factory) of StakingValidator.aes with mock/fake params/init.
+    - Create instance of MainStaking.aes with real params and instance (factory) of the above.
+    - Set the MainStaking instance as "reward_contract" address in the configuration.
+    - Create instance of HCElection.aes with MainStaking instance as param and random entropy string
+    - Set the HCElection instance address as "election_contract" in the configuration.
+    - Prepare child chain genesis
+        - Generate accounts.json with enought tokens funds for the stakers above
+        - Generate contracts.json to bootstrap with contract creation and calls the above instances
+- Add vault configuration, usualy validator and peer
+- Add terraform resources
+- Create terraform resources (terraform apply)
+- Update seed peer static peer key in vault
+- Update node configurations in vault
+- Reconfigure nodes (instance restart would do)
