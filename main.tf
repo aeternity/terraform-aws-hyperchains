@@ -1,14 +1,9 @@
-locals {
-  mdw_user_data = templatefile("${path.module}/templates/bootstrap-mdw.sh", {})
-}
-
 ###
 # Parent chain for demo hyperchain
 ###
 
 module "nodes_aehc_demo_parent_stockholm" {
-  # source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v3.0.1"
-  source            = "../terraform-aws-aenode-deploy"
+  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v3.1.0"
   env               = "aehc_demo"
 
   static_nodes   = 1
@@ -32,10 +27,10 @@ module "nodes_aehc_demo_parent_stockholm" {
   }
 
   config_tags = {
-    bootstrap_version = var.bootstrap_version
     vault_role        = "ae-node"
     vault_addr        = var.vault_addr
-    node_config       = "secret/aenode/config/aehc_demo_parent"
+    bootstrap_version = var.bootstrap_version
+    bootstrap_config  = "secret/aenode/config/aehc_demo_parent"
   }
 
   providers = {
@@ -44,8 +39,7 @@ module "nodes_aehc_demo_parent_stockholm" {
 }
 
 module "mdw_aehc_demo_parent_stockholm" {
-  # source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v3.0.1"
-  source            = "../terraform-aws-aenode-deploy"
+  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v3.1.0"
   env               = "aehc_demo"
 
   static_nodes   = 1
@@ -64,7 +58,6 @@ module "mdw_aehc_demo_parent_stockholm" {
   subnets = module.nodes_aehc_demo_parent_stockholm.subnets
 
   enable_mdw = true
-  user_data  = local.mdw_user_data
 
   asg_target_groups = module.lb_aehc_demo_parent_stockholm.target_groups_mdw
 
@@ -75,10 +68,10 @@ module "mdw_aehc_demo_parent_stockholm" {
   }
 
   config_tags = {
-    bootstrap_version = var.bootstrap_version
     vault_role        = "ae-node"
     vault_addr        = var.vault_addr
-    node_config       = "secret/aenode/config/aehc_demo_parent_mdw"
+    bootstrap_version = var.bootstrap_version
+    bootstrap_config  = "secret/aenode/config/aehc_demo_parent_mdw"
   }
 
   providers = {
@@ -87,8 +80,7 @@ module "mdw_aehc_demo_parent_stockholm" {
 }
 
 module "lb_aehc_demo_parent_stockholm" {
-  # source                    = "github.com/aeternity/terraform-aws-api-loadbalancer?ref=v1.4.0"
-  source                    = "../terraform-aws-api-loadbalancer"
+  source                    = "github.com/aeternity/terraform-aws-api-loadbalancer?ref=v1.6.0"
   env                       = "aehc_demo"
   fqdn                      = var.lb_fqdn_parent
   dns_zone                  = var.dns_zone
@@ -103,6 +95,7 @@ module "lb_aehc_demo_parent_stockholm" {
   internal_api_enabled      = true
   state_channel_api_enabled = false
   mdw_enabled               = true
+  dns_health_check          = false
 
   providers = {
     aws = aws.eu-north-1
@@ -114,8 +107,7 @@ module "lb_aehc_demo_parent_stockholm" {
 ###
 
 module "mdw_aehc_demo_stockholm" {
-  # source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v3.0.1"
-  source            = "../terraform-aws-aenode-deploy"
+  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v3.1.0"
   env               = "aehc_demo"
 
   static_nodes   = 1
@@ -134,9 +126,11 @@ module "mdw_aehc_demo_stockholm" {
   subnets = module.mdw_aehc_demo_stockholm.subnets
 
   enable_mdw = true
-  user_data  = local.mdw_user_data
 
-  asg_target_groups = module.lb_aehc_demo_stockholm.target_groups_mdw
+  asg_target_groups = concat(
+    module.lb_aehc_demo_stockholm.target_groups,
+    module.lb_aehc_demo_stockholm.target_groups_mdw
+  )
 
   tags = {
     role  = "aemdw"
@@ -145,10 +139,10 @@ module "mdw_aehc_demo_stockholm" {
   }
 
   config_tags = {
-    bootstrap_version = var.bootstrap_version
     vault_role        = "ae-node"
     vault_addr        = var.vault_addr
-    node_config       = "secret/aenode/config/aehc_demo_validator"
+    bootstrap_version = var.bootstrap_version
+    bootstrap_config  = "secret/aenode/config/aehc_demo_validator"
   }
 
   providers = {
@@ -157,8 +151,7 @@ module "mdw_aehc_demo_stockholm" {
 }
 
 module "lb_aehc_demo_stockholm" {
-  # source                    = "github.com/aeternity/terraform-aws-api-loadbalancer?ref=v1.4.0"
-  source                    = "../terraform-aws-api-loadbalancer"
+  source                    = "github.com/aeternity/terraform-aws-api-loadbalancer?ref=v1.6.0"
   env                       = "aehc_demo"
   fqdn                      = var.lb_fqdn
   dns_zone                  = var.dns_zone
@@ -173,6 +166,7 @@ module "lb_aehc_demo_stockholm" {
   internal_api_enabled      = true
   state_channel_api_enabled = false
   mdw_enabled               = true
+  dns_health_check          = false
 
   providers = {
     aws = aws.eu-north-1
