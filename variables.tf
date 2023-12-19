@@ -3,7 +3,7 @@ variable "vault_addr" {
 }
 
 variable "bootstrap_version" {
-  default = "v2.16.0"
+  default = "v2.16.1"
 }
 
 variable "dns_zone" {
