@@ -12,7 +12,7 @@ module "nodes_aehc_demo_parent_stockholm" {
 
   instance_type  = "m5.large"
   instance_types = ["m6i.large", "m5d.large", "m5.large"]
-  ami_name       = "aeternity-ubuntu-18.04-v1653564902"
+  ami_name       = "aeternity-ubuntu-22.04-v1709639419"
 
   root_volume_size        = 20
   additional_storage      = true
@@ -30,7 +30,7 @@ module "nodes_aehc_demo_parent_stockholm" {
     vault_role        = "ae-node"
     vault_addr        = var.vault_addr
     bootstrap_version = var.bootstrap_version
-    bootstrap_config  = "secret/aenode/config/aehc_demo_parent"
+    bootstrap_config  = "secret2/aenode/config/aehc_demo_parent"
   }
 
   providers = {
@@ -48,7 +48,7 @@ module "mdw_aehc_demo_parent_stockholm" {
 
   instance_type  = "t3.large"
   instance_types = ["t3.large", "c5.large", "m5.large"]
-  ami_name       = "aeternity-ubuntu-18.04-v1653564902"
+  ami_name       = "aeternity-ubuntu-22.04-v1709639419"
 
   root_volume_size        = 20
   additional_storage      = true
@@ -71,7 +71,7 @@ module "mdw_aehc_demo_parent_stockholm" {
     vault_role        = "ae-node"
     vault_addr        = var.vault_addr
     bootstrap_version = var.bootstrap_version
-    bootstrap_config  = "secret/aenode/config/aehc_demo_parent_mdw"
+    bootstrap_config  = "secret2/aenode/config/aehc_demo_parent_mdw"
   }
 
   providers = {
@@ -116,7 +116,7 @@ module "nodes_aehc_demo_stockholm" {
 
   instance_type  = "t3.large"
   instance_types = ["t3.large", "c5.large", "m5.large"]
-  ami_name       = "aeternity-ubuntu-18.04-v1653564902"
+  ami_name       = "aeternity-ubuntu-22.04-v1709639419"
 
   root_volume_size        = 20
   additional_storage      = true
@@ -134,7 +134,7 @@ module "nodes_aehc_demo_stockholm" {
     vault_role        = "ae-node"
     vault_addr        = var.vault_addr
     bootstrap_version = var.bootstrap_version
-    bootstrap_config  = "secret/aenode/config/aehc_demo_validator"
+    bootstrap_config  = "secret2/aenode/config/aehc_demo_validator"
   }
 
   providers = {
@@ -153,7 +153,7 @@ module "mdw_aehc_demo_stockholm" {
 
   instance_type  = "t3.large"
   instance_types = ["t3.large", "c5.large", "m5.large"]
-  ami_name       = "aeternity-ubuntu-18.04-v1653564902"
+  ami_name       = "aeternity-ubuntu-22.04-v1709639419"
 
   root_volume_size        = 20
   additional_storage      = true
@@ -176,7 +176,7 @@ module "mdw_aehc_demo_stockholm" {
     vault_role        = "ae-node"
     vault_addr        = var.vault_addr
     bootstrap_version = var.bootstrap_version
-    bootstrap_config  = "secret/aenode/config/aehc_demo_mdw"
+    bootstrap_config  = "secret2/aenode/config/aehc_demo_mdw"
   }
 
   providers = {
