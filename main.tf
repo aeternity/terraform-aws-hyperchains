@@ -11,7 +11,7 @@ module "nodes_aehc_demo_parent_stockholm" {
   spot_nodes_max = 0
 
   instance_type  = "m5.large"
-  instance_types = ["m6i.large", "m5d.large", "m5.large"]
+  instance_types = ["m6i.large", "m5.large"]
   ami_name       = "aeternity-ubuntu-22.04-v1709639419"
 
   root_volume_size        = 20
