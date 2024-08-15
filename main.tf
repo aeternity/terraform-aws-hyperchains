@@ -3,7 +3,7 @@
 ###
 
 module "nodes_aehc_demo_parent_stockholm" {
-  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v3.1.0"
+  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v3.4.0"
   env               = "aehc_demo"
 
   static_nodes   = 1
@@ -39,7 +39,7 @@ module "nodes_aehc_demo_parent_stockholm" {
 }
 
 module "mdw_aehc_demo_parent_stockholm" {
-  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v3.1.0"
+  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v3.4.0"
   env               = "aehc_demo"
 
   static_nodes   = 1
@@ -107,7 +107,7 @@ module "lb_aehc_demo_parent_stockholm" {
 ###
 
 module "nodes_aehc_demo_stockholm" {
-  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v3.1.0"
+  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v3.4.0"
   env               = "aehc_demo"
 
   static_nodes   = 1
@@ -144,7 +144,7 @@ module "nodes_aehc_demo_stockholm" {
 
 
 module "mdw_aehc_demo_stockholm" {
-  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v3.1.0"
+  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v3.4.0"
   env               = "aehc_demo"
 
   static_nodes   = 1
