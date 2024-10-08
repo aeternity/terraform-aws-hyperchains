@@ -3,7 +3,7 @@
 ###
 
 module "nodes_aehc_demo_parent_stockholm" {
-  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v3.4.0"
+  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v4.0.0"
   env               = "aehc_demo"
 
   static_nodes   = 1
@@ -39,7 +39,7 @@ module "nodes_aehc_demo_parent_stockholm" {
 }
 
 module "mdw_aehc_demo_parent_stockholm" {
-  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v3.4.0"
+  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v4.0.0"
   env               = "aehc_demo"
 
   static_nodes   = 1
@@ -80,7 +80,7 @@ module "mdw_aehc_demo_parent_stockholm" {
 }
 
 module "lb_aehc_demo_parent_stockholm" {
-  source                    = "github.com/aeternity/terraform-aws-api-loadbalancer?ref=v1.6.0"
+  source                    = "github.com/aeternity/terraform-aws-api-loadbalancer?ref=v2.0.0"
   env                       = "aehc_demo"
   fqdn                      = var.lb_fqdn_parent
   dns_zone                  = var.dns_zone
@@ -107,7 +107,7 @@ module "lb_aehc_demo_parent_stockholm" {
 ###
 
 module "nodes_aehc_demo_stockholm" {
-  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v3.4.0"
+  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v4.0.0"
   env               = "aehc_demo"
 
   static_nodes   = 1
@@ -144,7 +144,7 @@ module "nodes_aehc_demo_stockholm" {
 
 
 module "mdw_aehc_demo_stockholm" {
-  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v3.4.0"
+  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=v4.0.0"
   env               = "aehc_demo"
 
   static_nodes   = 1
@@ -185,7 +185,7 @@ module "mdw_aehc_demo_stockholm" {
 }
 
 module "lb_aehc_demo_stockholm" {
-  source                    = "github.com/aeternity/terraform-aws-api-loadbalancer?ref=v1.6.0"
+  source                    = "github.com/aeternity/terraform-aws-api-loadbalancer?ref=v2.0.0"
   env                       = "aehc_demo"
   fqdn                      = var.lb_fqdn
   dns_zone                  = var.dns_zone
